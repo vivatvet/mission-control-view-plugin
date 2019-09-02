@@ -34,7 +34,7 @@
                         <!-- VIEW_URL/api/json -->
                         <table id="jenkinsBuildHistory" class="table table-striped table-bordered ${it.tableStyle}">
                             <thead>
-                                <tr><th class="text-left">${%Job}</th><th>${%Build}</th><th>${%Finished}</th><th>${%Duration}</th></tr>
+                                <tr><th class="text-left">${%Job}</th><th>${%description}</th><th>${%Build}</th><th>${%Finished}</th><th>${%Duration}</th></tr>
                             </thead>
                             <tbody></tbody>
                         </table>
@@ -44,7 +44,7 @@
                         <!-- JENKINS_URL/queue/api/json -->
                         <table id="jenkinsBuildQueue" class="table table-striped table-bordered ${it.tableStyle}">
                             <thead>
-                                <tr><th class="text-left">${%Job}</th><th>${%InQueueSince}</th><th>${%WaitingFor}</th></tr>
+                                <tr><th class="text-left">${%Job}</th><th>${%params}</th><th>${%InQueueSince}</th><th>${%WaitingFor}</th></tr>
                             </thead>
                             <tbody></tbody>
                         </table>

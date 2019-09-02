@@ -46,8 +46,11 @@ function reload_jenkins_build_queue(tableSelector, jenkinsUrl, buildQueueSize) {
       now = new Date();
       waitingFor = now.getTime() - val.inQueueSince;
       taskName = val.task.name.replace(/(,?)\w*=/g, "$1");
-      newRow = '<tr><td class="text-left"><a href="' + val.task.url + '">'+ taskName + '</a></td><td>' + format_date(startDate) + '</td><td>' + format_interval(waitingFor) + '</td></tr>';
-      $(tableSelector + ' tbody').append(newRow);
+      paramDes = val.params.replace(/\n/g, " ").replace(/.*Description=/, "");
+      newRow = '<tr><td class="text-left"><a href="' + val.task.url + '">'+ taskName + '</a></td><td>' + paramDes + '</td><td>' + format_date(startDate) + '</td><td>' + format_interval(waitingFor) + '</td></tr>';
+      if (taskName == "rel-stage-flow") {
+        $(tableSelector + ' tbody').append(newRow);
+      }
     });
   });
 }
@@ -80,6 +83,7 @@ function reload_jenkins_build_history(tableSelector, viewUrl, buildHistorySize) 
       }
       dt = new Date(val.startTime + val.duration);
       jobName = val.buildName.replace(/(.*) #.*/, '$1');
+      description = val.description.replace(/\n/g, " ");
       switch (val.result) {
         case 'SUCCESS':
           classes = '';
@@ -98,7 +102,7 @@ function reload_jenkins_build_history(tableSelector, viewUrl, buildHistorySize) 
           console.log('Job: ' + val.jobName + ' Result: ' + val.result);
           classes = '';
       }
-      newRow = '<tr class="' + classes + '"><td class="text-left">' + jobName + '</td><td>' + val.number + '</td><td>' + format_date(dt) + '</td><td>' + format_interval(val.duration) + '</td></tr>';
+      newRow = '<tr class="' + classes + '"><td class="text-left">' + jobName + '</td><td>' + description + '</td><td>' + val.number + '</td><td>' + format_date(dt) + '</td><td>' + format_interval(val.duration) + '</td></tr>';
       $(tableSelector + ' tbody').append(newRow);
     });
   });

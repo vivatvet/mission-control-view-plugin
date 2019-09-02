@@ -307,12 +307,17 @@ public class MissionControlView extends View {
                 continue;
 
             Result result = build.getResult();
+            String desp = build.getDescription();
+            if (desp == null) {
+                desp = "";
+            }
             l.add(new Build(job.getName(),
                     build.getFullDisplayName(),
                     build.getNumber(),
                     build.getStartTimeInMillis(),
                     build.getDuration(),
-                    result == null ? "BUILDING" : result.toString()));
+                    result == null ? "BUILDING" : result.toString(),
+                    desp));
         }
 
         return l;
@@ -332,14 +337,17 @@ public class MissionControlView extends View {
         public long duration;
         @Exported
         public String result;
+        @Exported
+        public String description;
 
-        public Build(String jobName, String buildName, int number, long startTime, long duration, String result) {
+        public Build(String jobName, String buildName, int number, long startTime, long duration, String result, String description) {
             this.jobName = jobName;
             this.buildName = buildName;
             this.number = number;
             this.startTime = startTime;
             this.duration = duration;
             this.result = result;
+            this.description = description;
         }
     }
 
