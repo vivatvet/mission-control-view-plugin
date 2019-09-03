@@ -46,7 +46,7 @@ function reload_jenkins_build_queue(tableSelector, jenkinsUrl, buildQueueSize) {
       now = new Date();
       waitingFor = now.getTime() - val.inQueueSince;
       taskName = val.task.name.replace(/(,?)\w*=/g, "$1");
-      paramDes = val.params.replace(/\n/g, " ").replace(/.*Description=/, "");
+      paramDes = val.params.replace(/\n/g, " ").replace(/.*Buld_Variant=/, "").replace(/issues=/, "").replace(/Without_Deploy=.*/, "");
       newRow = '<tr><td class="text-left"><a href="' + val.task.url + '">'+ taskName + '</a></td><td>' + paramDes + '</td><td>' + format_date(startDate) + '</td><td>' + format_interval(waitingFor) + '</td></tr>';
       if (taskName == "rel-stage-flow") {
         $(tableSelector + ' tbody').append(newRow);
